@@ -10,7 +10,8 @@
     "http-server": "0.9.0",
     "opt-cli": "1.5.1",
     "webpack": "2.7.0",
-    "webpack-validator": "^3.0.0"
+    "webpack-validator": "^3.0.0",
+    "webpack-dev-server": "^2.6.1"
   },
   "config": {
     "ghooks": {
@@ -18,7 +19,9 @@
     }
   },
   "scripts": {
-    "build:dev": "webpack",
+    "build": "webpack -p --env.prod",
+    "dev": "webpack-dev-server --env.dev",
+    "build:dev": "webpack --env.dev",
     "validate": "npm run lint",
     "start": "http-server --silent -c-1",
     "lint": "eslint ."
