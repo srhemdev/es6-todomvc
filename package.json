@@ -27,7 +27,9 @@
     "webpack": "2.1.0-beta.20",
     "webpack-config-utils": "2.0.0",
     "webpack-dev-server": "2.1.0-beta.0",
-    "webpack-validator": "2.2.7"
+    "webpack-validator": "2.2.7",
+    "karma-webpack": "^2.0.4",
+    "requirejs": "^2.3.4"
   },
   "config": {
     "ghooks": {
