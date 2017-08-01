@@ -1,5 +1,5 @@
 import {subscribe, getTodo} from '../todo'
-import renderGraph from './render'
+//import loadAndRenderGraph from './render'
 
 let graphArea
 const unsubscribe = {
@@ -20,7 +20,7 @@ function toggleGraph() {
     graphArea = document.createElement('div')
     document.body.querySelector('.graph-area-container').appendChild(graphArea)
     const {storage} = getTodo()
-    renderGraph(graphArea, storage)
+    loadAndRenderGraph(graphArea, storage)
     updateTodoSubscription()
     updateStoreSubscription(storage)
     return true
@@ -34,7 +34,7 @@ function updateTodoSubscription() {
   unsubscribe.todo = subscribe(function onTodoUpdate() {
     const {storage} = getTodo()
     updateStoreSubscription(storage)
-    renderGraph(graphArea, storage)
+    loadAndRenderGraph(graphArea, storage)
   })
 }
 
@@ -43,6 +43,17 @@ function updateStoreSubscription(store) {
     unsubscribe.store()
   }
   unsubscribe.store = store.subscribe(function onStoreUpdate() {
-    renderGraph(graphArea, store)
+    loadAndRenderGraph(graphArea, store)
   })
 }
+
+function loadAndRenderGraph(graphArea, store) {
+    System.import('./render').then(thing => {
+      const renderGraph = thing.default;
+      renderGraph(graphArea, store)
+    });
+}
+
+/**
+ * System.import()
+ */
